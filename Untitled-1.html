@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Citas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #4285f4;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        form input[type="submit"] {
+            background-color: #4285f4;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #357abd;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            max-width: 800px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4285f4;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cita-info {
+            flex: 1;
+        }
+
+        .delete-button {
+            flex: 0;
+            padding: 5px;
+            background-color: #ff5555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Citas</h1>
+    </header>
+
+    <form id="citaForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required>
+
+        <label for="telefono">Teléfono (opcional):</label>
+        <input type="tel" id="telefono">
+
+        <label for="fecha">Fecha de la cita:</label>
+        <input type="date" id="fecha" required>
+
+        <label for="hora">Hora de la cita:</label>
+        <input type="time" id="hora" required>
+
+        <input type="submit" value="Solicitar Cita">
+    </form>
+
+    <h2>Citas Programadas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody id="citasList">
+            <!-- Las citas programadas se mostrarán aquí -->
+        </tbody>
+    </table>
+
+    <script>
+        const citaForm = document.getElementById('citaForm');
+        const citasList = document.getElementById('citasList');
+
+        citaForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const telefono = document.getElementById('telefono').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${nombre}</td>
+                <td>${apellido}</td>
+                <td>${telefono}</td>
+                <td>${fecha}</td>
+                <td>${hora}</td>
+            `;
+
+            citasList.appendChild(newRow);
+
+            citaForm.reset();
+        });
+    </script>
+</body>
+</html>
